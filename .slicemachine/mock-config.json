@@ -1,0 +1,16 @@
+{
+  "_cts": {
+    "author": {},
+    "displayed_arts_images": {},
+    "portfolio_page_texts": {},
+    "contatos": {}
+  },
+  "slices": {
+    "PortfolioTitle": {},
+    "GalleryPortfolio": {
+      "default": {
+        "primary": {}
+      }
+    }
+  }
+}

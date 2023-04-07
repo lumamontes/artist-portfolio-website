@@ -1,115 +1,130 @@
+import { createClient } from '../prismicio';
+
+import { PrismicRichText } from "@prismicio/react";
+
+import { format } from 'date-fns';
+import ptBR from 'date-fns/locale/pt-BR';
 import Head from 'next/head';
-import styles from '../styles/Home.module.css';
+import { useState } from 'react';
+// import { FiCalendar, FiUser } from 'react-icons/fi';
+import Layout from "../components/layout";
+import { Heading } from '@components/Heading';
+import { Text } from '@components/Text';
 
-export default function Home() {
+export default function Home({ postsPagination, headingContent }) {
+  const [posts, setPosts] = useState(postsPagination);
+  const loadMorePosts = async () => {
+    const nextPageUrl = posts.next_page;
+    if (!nextPageUrl) {
+      return;
+    }
+    const response = await fetch(nextPageUrl);
+    const { results, next_page } = await response.json();
+    const newPosts = results.map(post => {
+      return {
+        uid: post.uid,
+        first_publication_date: format(
+          new Date(post.last_publication_date),
+          'dd LLL yyyy',
+          {
+            locale: ptBR,
+          }
+        ),
+        data: {
+          title: post.data.title,
+          subtitle: post.data.subtitle,
+          author: post.data.author,
+        },
+      };
+    });
+    const newPostsWithPagination = {
+      results: [...posts.results, ...newPosts],
+      next_page,
+    };
+    setPosts(newPostsWithPagination);
+  };
+
   return (
-    <div className={styles.container}>
+    <>
       <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Luana Góes</title>
       </Head>
-
-      <main>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing <code>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel" className={styles.logo} />
-        </a>
-      </footer>
-
-      <style jsx>{`
-        main {
-          padding: 5rem 0;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-        footer {
-          width: 100%;
-          height: 100px;
-          border-top: 1px solid #eaeaea;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-        footer img {
-          margin-left: 0.5rem;
-        }
-        footer a {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          text-decoration: none;
-          color: inherit;
-        }
-        code {
-          background: #fafafa;
-          border-radius: 5px;
-          padding: 0.75rem;
-          font-size: 1.1rem;
-          font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-        }
-      `}</style>
-
-      <style jsx global>{`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-        }
-        * {
-          box-sizing: border-box;
-        }
-      `}</style>
-    </div>
-  )
+      <Layout>
+        <main className='max-w-xl mr-auto ml-auto text-center'>
+        <PrismicRichText 
+          field={headingContent.results[0].data.title}   
+          fallback={<p>No content</p>}
+      />
+        <PrismicRichText field={headingContent.results[0].data.description}fallback={<p>No content</p>}/>
+          <div className="grid grid-cols-1 gap-4 ">
+            {posts.results.length > 0 && posts.results.map(post => (
+                <div key={post.uid} className="group/post transition-opacity  hover:bg-slate-100 hover:opacity-90 hover:pb-6">
+                  <img src={post.data.img} alt={post.data.title} className="rounded" />
+                  <a className="group/edit invisible group-hover/post:visible ..." >
+                    <span className="self-end">{post.data.title}</span>
+                  </a>
+                </div>
+            ))}
+          </div>
+          {posts.next_page && (
+            <div>
+              <a onClick={loadMorePosts}>Carregar mais artezinhas :)</a>
+            </div>
+          )}
+        </main>
+      </Layout>
+    </>
+  );
 }
+export const getStaticProps = async () => {
+  const client = createClient();
+  const postsResponse = await client.getByType('displayed_arts_images');
+
+  const headingResponse = await client.getByType('portfolio_page_texts')
+
+  const postsPagination = {
+    next_page: postsResponse.next_page,
+    results: postsResponse.results.map(post => {
+      return {
+        uid: post.uid,
+        first_publication_date: format(
+          new Date(post.last_publication_date),
+          'dd LLL yyyy',
+          {
+            locale: ptBR,
+          }
+        ),
+        data: {
+          title: post.data.name,
+          img: post.data.img.url
+        },
+      };
+    }),
+  };
+  
+ const headingContent = { results:  headingResponse.results.map(item => {
+        return {
+          uid: item.uid,
+          first_publication_date: format(
+            new Date(item.last_publication_date),
+            'dd LLL yyyy',
+            {
+              locale: ptBR,
+            }
+          ),
+          data: {
+            title: item.data.title,
+            description: item.data.description,
+          },
+      };
+  })
+};
+
+
+  return {
+    props: {
+      postsPagination,
+      headingContent
+    },
+  };
+};

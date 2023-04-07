@@ -1,0 +1,60 @@
+{
+  "uid": {
+    "__TYPE__": "UIDContent",
+    "value": "fifteen"
+  },
+  "name": {
+    "__TYPE__": "StructuredTextContent",
+    "value": [
+      {
+        "type": "heading1",
+        "content": {
+          "text": "Control"
+        }
+      }
+    ]
+  },
+  "about": {
+    "__TYPE__": "StructuredTextContent",
+    "value": [
+      {
+        "type": "paragraph",
+        "content": {
+          "text": "Proident nostrud mollit anim nulla enim anim ipsum aute proident occaecat irure dolor eu. Ad id culpa deserunt consectetur tempor dolore sit nisi eiusmod exercitation cillum id."
+        }
+      }
+    ]
+  },
+  "image": {
+    "__TYPE__": "ImageContent",
+    "origin": {
+      "id": "main",
+      "url": "https://images.unsplash.com/photo-1579931794097-0ad001e51edb",
+      "width": 3958,
+      "height": 3958
+    },
+    "url": "https://images.unsplash.com/photo-1579931794097-0ad001e51edb",
+    "width": 3958,
+    "height": 3958,
+    "edit": {
+      "zoom": 1,
+      "crop": {
+        "x": 0,
+        "y": 0
+      },
+      "background": "transparent"
+    },
+    "thumbnails": {}
+  },
+  "small_description": {
+    "__TYPE__": "StructuredTextContent",
+    "value": [
+      {
+        "type": "paragraph",
+        "content": {
+          "text": "Aliquip do occaecat qui dolor deserunt nisi irure laboris dolor occaecat mollit sint nulla anim. Commodo in culpa sunt velit et dolore enim aliqua."
+        }
+      }
+    ]
+  }
+}
