@@ -14,7 +14,6 @@ import ImageTest from '@components/image';
 import ImageSlice from '@components/image';
 
 export default function Home({ postsPagination, headingContent, headingResponse }) {
-  // console.log(headingResponse)
   const [posts, setPosts] = useState(postsPagination);
 
   const loadMorePosts = async () => {
@@ -43,7 +42,6 @@ export default function Home({ postsPagination, headingContent, headingResponse 
         },
       };
     });
-    console.log(newPosts);
     const newPostsWithPagination = {
       results: [...posts.results, ...newPosts],
       next_page,
