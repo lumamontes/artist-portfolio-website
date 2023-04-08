@@ -1,6 +1,7 @@
 import { Heading } from '@components/Heading';
 import { Text } from '@components/Text';
 import { PrismicProvider, PrismicToolbar } from '@prismicio/react';
+import Head from 'next/head';
 import "../styles/tailwind.css";
 
 function MyApp({ Component, pageProps }) {
@@ -13,6 +14,9 @@ function MyApp({ Component, pageProps }) {
       internalLinkComponent={props => <Link {...props} 
 
       />} >
+      <Head>
+        <title>Luana Góes</title>
+      </Head>
       <Component {...pageProps} />
     </PrismicProvider>
   );

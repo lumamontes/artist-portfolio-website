@@ -53,10 +53,7 @@ export default function Home({ postsPagination, headingContent, headingResponse 
 
   return (
     <>
-      <Head>
-        <title>Luana Góes</title>
-      </Head>
-      <Layout>
+     <Layout>
         <main className='max-w-xl mr-auto ml-auto text-center'>
         <PrismicRichText 
           field={headingContent.results[0].data.title}   
