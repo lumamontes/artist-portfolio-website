@@ -21,10 +21,10 @@ export default function About({ author, siteconfig }) {
             <PrismicRichText field={author?.results[0].data?.small_description} />
         </div>
 
-        <div className="grid grid-cols-1 rounded gap-5">
+        {/* <div className="grid grid-cols-1 rounded md:max-w-md md:my-auto bg-red-400"> */}
               <div
                 key={author.uid}
-                className="rounded-md aspect-square odd:translate-y-6 odd:md:translate-y-12 mb-6 ">
+                className="rounded-md aspect-square odd:translate-y-6 odd:md:translate-y-12 mb-6 md:max-w-md md:mx-auto">
                 <Image
                   src={author.results[0].data.img_url}
                   alt={author.results[0].data.name || " "}
@@ -32,7 +32,7 @@ export default function About({ author, siteconfig }) {
                   objectFit="contain"
                 />
               </div>
-        </div>
+        {/* </div> */}
 
         <div className="mx-auto prose text-center dark:prose-invert mt-14 leading-loose">
           {/* <PrismicRichText field={author?.results[0].data?.name} /> */}
@@ -41,7 +41,7 @@ export default function About({ author, siteconfig }) {
                 paragraph: ({ children }) => <Text size="lg" asChild><p>{children}</p></Text>
             }
           } />
-          <small className="text-gray-500"><em>Atualizado em {author.results[0]?.last_publication_date}</em></small>
+          <small className="text-gray-500"><em>Updated {author.results[0]?.last_publication_date}</em></small>
           <p>
             <Link href="/contact">Get in touch</Link>
           </p>
