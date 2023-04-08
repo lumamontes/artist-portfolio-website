@@ -48,6 +48,8 @@ export default function Navbar(props) {
 
 
   const mobilemenu = [...leftmenu, ...rightmenu];
+  const router = useRouter();
+  const currentRoute = router.pathname;
   return (
     <Container>
       <nav>
@@ -58,7 +60,9 @@ export default function Navbar(props) {
                 <div className="flex-col items-center justify-start order-1 hidden w-full md:flex md:flex-row md:justify-end md:w-auto md:order-none md:flex-1">
                   {leftmenu.map((item, index) => (
                     <Link href={item.href} key={index} legacyBehavior>
-                      <a className="px-5 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-blue-500" >
+                      <a className={`px-5 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-blue-500 ${currentRoute === item.href 
+                    ? "text-blue-500" 
+                    : "text-gray-500"}`} >
                         {item.label}
                       </a>
                     </Link>
@@ -135,7 +139,9 @@ export default function Navbar(props) {
                   {mobilemenu.map((item, index) => (
                     <Link href={item.href} key={index} legacyBehavior>
                       <a
-                        className="px-5 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-blue-500"
+                        className={`px-5 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-blue-500 ${currentRoute === item.href 
+                          ? "text-blue-500" 
+                          : "text-gray-500"}`}
                         target={item.external ? "_blank" : ""}
                         rel={item.external ? "noopener" : ""}>
                         {item.label}
