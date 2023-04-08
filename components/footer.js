@@ -1,8 +1,4 @@
 import Container from "./container";
-// import ThemeSwitch from "./themeSwitch";
-import Image from "next/image";
-import { myLoader } from "../utils/all";
-import VercelLogo from "../public/img/vercel.svg";
 
 export default function Footer(props) {
   return (
@@ -14,7 +10,6 @@ export default function Footer(props) {
       <div className="flex justify-center gap-1 mt-1 text-sm text-center text-gray-500 dark:text-gray-600">
          Com por ❤️ <a href="https://github.com/lumamontes" target="_blank" className="hover:to-blue-500">Luma</a>
       </div>
-     
     </Container>
   );
 }

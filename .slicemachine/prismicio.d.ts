@@ -63,8 +63,54 @@ interface AuthorDocumentData {
  * @typeParam Lang - Language API ID of the document.
  */
 export type AuthorDocument<Lang extends string = string> = prismicT.PrismicDocumentWithUID<Simplify<AuthorDocumentData>, "author", Lang>;
+/** Content for ContactsNavbar documents */
+interface ContactsnavbarDocumentData {
+    /**
+     * Slice Zone field in *ContactsNavbar*
+     *
+     * - **Field Type**: Slice Zone
+     * - **Placeholder**: *None*
+     * - **API ID Path**: contactsnavbar.slices[]
+     * - **Tab**: Main
+     * - **Documentation**: https://prismic.io/docs/core-concepts/slices
+     *
+     */
+    slices: prismicT.SliceZone<ContactsnavbarDocumentDataSlicesSlice>;
+}
+/**
+ * Slice for *ContactsNavbar → Slice Zone*
+ *
+ */
+type ContactsnavbarDocumentDataSlicesSlice = NavItemLinkSlice;
+/**
+ * ContactsNavbar document from Prismic
+ *
+ * - **API ID**: `contactsnavbar`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/core-concepts/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type ContactsnavbarDocument<Lang extends string = string> = prismicT.PrismicDocumentWithoutUID<Simplify<ContactsnavbarDocumentData>, "contactsnavbar", Lang>;
 /** Content for Contatos documents */
-type ContatosDocumentData = Record<string, never>;
+interface ContatosDocumentData {
+    /**
+     * Slice Zone field in *Contatos*
+     *
+     * - **Field Type**: Slice Zone
+     * - **Placeholder**: *None*
+     * - **API ID Path**: contatos.slices[]
+     * - **Tab**: Main
+     * - **Documentation**: https://prismic.io/docs/core-concepts/slices
+     *
+     */
+    slices: prismicT.SliceZone<ContatosDocumentDataSlicesSlice>;
+}
+/**
+ * Slice for *Contatos → Slice Zone*
+ *
+ */
+type ContatosDocumentDataSlicesSlice = HeadingSlice;
 /**
  * Contatos document from Prismic
  *
@@ -177,7 +223,7 @@ type PortfolioPageTextsDocumentDataSlicesSlice = GalleryPortfolioSlice;
  * @typeParam Lang - Language API ID of the document.
  */
 export type PortfolioPageTextsDocument<Lang extends string = string> = prismicT.PrismicDocumentWithUID<Simplify<PortfolioPageTextsDocumentData>, "portfolio_page_texts", Lang>;
-export type AllDocumentTypes = AuthorDocument | ContatosDocument | DisplayedArtsImagesDocument | PortfolioPageTextsDocument;
+export type AllDocumentTypes = AuthorDocument | ContactsnavbarDocument | ContatosDocument | DisplayedArtsImagesDocument | PortfolioPageTextsDocument;
 /**
  * Item in GalleryPortfolio → Items
  *
@@ -227,6 +273,114 @@ type GalleryPortfolioSliceVariation = GalleryPortfolioSliceDefault;
  *
  */
 export type GalleryPortfolioSlice = prismicT.SharedSlice<"gallery_portfolio", GalleryPortfolioSliceVariation>;
+/**
+ * Primary content in Heading → Primary
+ *
+ */
+interface HeadingSliceDefaultPrimary {
+    /**
+     * Title field in *Heading → Primary*
+     *
+     * - **Field Type**: Title
+     * - **Placeholder**: This is where it all begins...
+     * - **API ID Path**: heading.primary.title
+     * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
+     *
+     */
+    title: prismicT.TitleField;
+    /**
+     * Description field in *Heading → Primary*
+     *
+     * - **Field Type**: Rich Text
+     * - **Placeholder**: A nice description of your feature
+     * - **API ID Path**: heading.primary.description
+     * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
+     *
+     */
+    description: prismicT.RichTextField;
+    /**
+     * adress field in *Heading → Primary*
+     *
+     * - **Field Type**: GeoPoint
+     * - **Placeholder**: *None*
+     * - **API ID Path**: heading.primary.adress
+     * - **Documentation**: https://prismic.io/docs/core-concepts/geopoint
+     *
+     */
+    adress: prismicT.GeoPointField;
+}
+/**
+ * Default variation for Heading Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: `Heading`
+ * - **Documentation**: https://prismic.io/docs/core-concepts/reusing-slices
+ *
+ */
+export type HeadingSliceDefault = prismicT.SharedSliceVariation<"default", Simplify<HeadingSliceDefaultPrimary>, never>;
+/**
+ * Slice variation for *Heading*
+ *
+ */
+type HeadingSliceVariation = HeadingSliceDefault;
+/**
+ * Heading Shared Slice
+ *
+ * - **API ID**: `heading`
+ * - **Description**: `Heading`
+ * - **Documentation**: https://prismic.io/docs/core-concepts/reusing-slices
+ *
+ */
+export type HeadingSlice = prismicT.SharedSlice<"heading", HeadingSliceVariation>;
+/**
+ * Primary content in NavItemLink → Primary
+ *
+ */
+interface NavItemLinkSliceDefaultPrimary {
+    /**
+     * Title field in *NavItemLink → Primary*
+     *
+     * - **Field Type**: Rich Text
+     * - **Placeholder**: This is where it all begins...
+     * - **API ID Path**: nav_item_link.primary.title
+     * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
+     *
+     */
+    title: prismicT.RichTextField;
+    /**
+     * external_link field in *NavItemLink → Primary*
+     *
+     * - **Field Type**: Link
+     * - **Placeholder**: *None*
+     * - **API ID Path**: nav_item_link.primary.external_link
+     * - **Documentation**: https://prismic.io/docs/core-concepts/link-content-relationship
+     *
+     */
+    external_link: prismicT.LinkField;
+}
+/**
+ * Default variation for NavItemLink Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: `NavItemLink`
+ * - **Documentation**: https://prismic.io/docs/core-concepts/reusing-slices
+ *
+ */
+export type NavItemLinkSliceDefault = prismicT.SharedSliceVariation<"default", Simplify<NavItemLinkSliceDefaultPrimary>, never>;
+/**
+ * Slice variation for *NavItemLink*
+ *
+ */
+type NavItemLinkSliceVariation = NavItemLinkSliceDefault;
+/**
+ * NavItemLink Shared Slice
+ *
+ * - **API ID**: `nav_item_link`
+ * - **Description**: `NavItemLink`
+ * - **Documentation**: https://prismic.io/docs/core-concepts/reusing-slices
+ *
+ */
+export type NavItemLinkSlice = prismicT.SharedSlice<"nav_item_link", NavItemLinkSliceVariation>;
 /**
  * Primary content in PortfolioTitle → Primary
  *
@@ -281,6 +435,6 @@ declare module "@prismicio/client" {
         (repositoryNameOrEndpoint: string, options?: prismic.ClientConfig): prismic.Client<AllDocumentTypes>;
     }
     namespace Content {
-        export type { AuthorDocumentData, AuthorDocument, ContatosDocumentData, ContatosDocument, DisplayedArtsImagesDocumentData, DisplayedArtsImagesDocumentDataSlicesSlice, DisplayedArtsImagesDocument, PortfolioPageTextsDocumentData, PortfolioPageTextsDocumentDataSlicesSlice, PortfolioPageTextsDocument, AllDocumentTypes, GalleryPortfolioSliceDefaultItem, GalleryPortfolioSliceDefault, GalleryPortfolioSliceVariation, GalleryPortfolioSlice, PortfolioTitleSliceDefaultPrimary, PortfolioTitleSliceDefault, PortfolioTitleSliceVariation, PortfolioTitleSlice };
+        export type { AuthorDocumentData, AuthorDocument, ContactsnavbarDocumentData, ContactsnavbarDocumentDataSlicesSlice, ContactsnavbarDocument, ContatosDocumentData, ContatosDocumentDataSlicesSlice, ContatosDocument, DisplayedArtsImagesDocumentData, DisplayedArtsImagesDocumentDataSlicesSlice, DisplayedArtsImagesDocument, PortfolioPageTextsDocumentData, PortfolioPageTextsDocumentDataSlicesSlice, PortfolioPageTextsDocument, AllDocumentTypes, GalleryPortfolioSliceDefaultItem, GalleryPortfolioSliceDefault, GalleryPortfolioSliceVariation, GalleryPortfolioSlice, HeadingSliceDefaultPrimary, HeadingSliceDefault, HeadingSliceVariation, HeadingSlice, NavItemLinkSliceDefaultPrimary, NavItemLinkSliceDefault, NavItemLinkSliceVariation, NavItemLinkSlice, PortfolioTitleSliceDefaultPrimary, PortfolioTitleSliceDefault, PortfolioTitleSliceVariation, PortfolioTitleSlice };
     }
 }

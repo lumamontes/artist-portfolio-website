@@ -1,0 +1,43 @@
+[
+  {
+    "__TYPE__": "SharedSliceContent",
+    "variation": "default",
+    "primary": {
+      "title": {
+        "__TYPE__": "StructuredTextContent",
+        "value": [
+          {
+            "type": "heading1",
+            "content": {
+              "text": "Result"
+            }
+          }
+        ]
+      },
+      "description": {
+        "__TYPE__": "StructuredTextContent",
+        "value": [
+          {
+            "type": "paragraph",
+            "content": {
+              "text": "Consectetur eu occaecat labore quis pariatur qui velit. Sint nisi irure enim."
+            }
+          }
+        ]
+      },
+      "adress": {
+        "__TYPE__": "GeoPointContent",
+        "position": {
+          "lat": 48.8703712,
+          "lng": 2.3865198
+        }
+      }
+    },
+    "items": [
+      {
+        "__TYPE__": "GroupItemContent",
+        "value": []
+      }
+    ]
+  }
+]

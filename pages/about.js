@@ -11,7 +11,6 @@ import Link from "next/link";
 import { createClient } from "prismicio";
 
 export default function About({ author, siteconfig }) {
-    console.log(author)
   return (
     <Layout {...siteconfig}>
       <Container>
@@ -25,13 +24,12 @@ export default function About({ author, siteconfig }) {
         <div className="grid grid-cols-1 rounded gap-5">
               <div
                 key={author.uid}
-                className="rounded-md aspect-square odd:translate-y-10 odd:md:translate-y-16 mb-6">
+                className="rounded-md aspect-square odd:translate-y-6 odd:md:translate-y-12 mb-6 ">
                 <Image
                   src={author.results[0].data.img_url}
                   alt={author.results[0].data.name || " "}
                   layout="fill"
-                  objectFit="cover "
-                  sizes="(max-width: 320px) 600px, 320px"
+                  objectFit="contain"
                 />
               </div>
         </div>

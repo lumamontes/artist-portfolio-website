@@ -1,7 +1,7 @@
 {
-  "id": "contatos",
-  "label": "Contatos",
-  "repeatable": true,
+  "id": "contactsnavbar",
+  "label": "ContactsNavbar",
+  "repeatable": false,
   "status": true,
   "json": {
     "Main": {
@@ -10,7 +10,7 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
-            "heading": {
+            "nav_item_link": {
               "type": "SharedSlice"
             }
           }

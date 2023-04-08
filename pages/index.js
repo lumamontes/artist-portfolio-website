@@ -1,6 +1,6 @@
 import { createClient } from '../prismicio';
 
-import { PrismicRichText } from "@prismicio/react";
+import { PrismicRichText, SliceZone } from "@prismicio/react";
 
 import { format } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
@@ -10,16 +10,23 @@ import { useState } from 'react';
 import Layout from "../components/layout";
 import { Heading } from '@components/Heading';
 import { Text } from '@components/Text';
+import ImageTest from '@components/image';
+import ImageSlice from '@components/image';
 
-export default function Home({ postsPagination, headingContent }) {
+export default function Home({ postsPagination, headingContent, headingResponse }) {
+  // console.log(headingResponse)
   const [posts, setPosts] = useState(postsPagination);
+
   const loadMorePosts = async () => {
     const nextPageUrl = posts.next_page;
+
     if (!nextPageUrl) {
       return;
     }
     const response = await fetch(nextPageUrl);
+
     const { results, next_page } = await response.json();
+
     const newPosts = results.map(post => {
       return {
         uid: post.uid,
@@ -31,12 +38,12 @@ export default function Home({ postsPagination, headingContent }) {
           }
         ),
         data: {
-          title: post.data.title,
-          subtitle: post.data.subtitle,
-          author: post.data.author,
+          title: post.data.name,
+          img: post.data.img.url
         },
       };
     });
+    console.log(newPosts);
     const newPostsWithPagination = {
       results: [...posts.results, ...newPosts],
       next_page,
@@ -65,9 +72,16 @@ export default function Home({ postsPagination, headingContent }) {
                   </a>
                 </div>
             ))}
+            {/* <SliceZone
+                slices={headingResponse.results[0].data.slices}
+                components={{ 
+                  images: ImageSlice
+                 }}
+                 defaultComponent={ImageSlice}
+              /> */}
           </div>
           {posts.next_page && (
-            <div>
+            <div className='my-10 underline cursor-pointer hover:bg-blue-500'>
               <a onClick={loadMorePosts}>Carregar mais artezinhas :)</a>
             </div>
           )}
@@ -78,7 +92,9 @@ export default function Home({ postsPagination, headingContent }) {
 }
 export const getStaticProps = async () => {
   const client = createClient();
-  const postsResponse = await client.getByType('displayed_arts_images');
+  const postsResponse = await client.getByType('displayed_arts_images', {
+    pageSize: 10
+  });
 
   const headingResponse = await client.getByType('portfolio_page_texts')
 
@@ -124,7 +140,8 @@ export const getStaticProps = async () => {
   return {
     props: {
       postsPagination,
-      headingContent
+      headingContent,
+      headingResponse
     },
   };
 };

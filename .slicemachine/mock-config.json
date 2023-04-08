@@ -3,7 +3,8 @@
     "author": {},
     "displayed_arts_images": {},
     "portfolio_page_texts": {},
-    "contatos": {}
+    "contatos": {},
+    "contactsnavbar": {}
   },
   "slices": {
     "PortfolioTitle": {},
@@ -11,6 +12,12 @@
       "default": {
         "primary": {}
       }
-    }
+    },
+    "NavItemLink": {
+      "default": {
+        "primary": {}
+      }
+    },
+    "Heading": {}
   }
 }

@@ -1,1 +1,52 @@
-{}
+{
+  "slices": {
+    "__TYPE__": "SliceContentType",
+    "value": [
+      {
+        "key": "heading$f51518f6-9e8e-4220-b272-0b42ed36e6f2",
+        "name": "heading",
+        "widget": {
+          "__TYPE__": "SharedSliceContent",
+          "variation": "default",
+          "primary": {
+            "title": {
+              "__TYPE__": "StructuredTextContent",
+              "value": [
+                {
+                  "type": "heading1",
+                  "content": {
+                    "text": "Shore"
+                  }
+                }
+              ]
+            },
+            "description": {
+              "__TYPE__": "StructuredTextContent",
+              "value": [
+                {
+                  "type": "paragraph",
+                  "content": {
+                    "text": "Occaecat et sunt commodo. Sint esse ea exercitation id velit aute officia qui adipisicing cupidatat proident aliqua cupidatat excepteur."
+                  }
+                }
+              ]
+            },
+            "adress": {
+              "__TYPE__": "GeoPointContent",
+              "position": {
+                "lat": 48.8606111,
+                "lng": 2.337644
+              }
+            }
+          },
+          "items": [
+            {
+              "__TYPE__": "GroupItemContent",
+              "value": []
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Disclosure } from "@headlessui/react";
 import Container from "./container";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { createClient } from "prismicio";
+import { SliceZone } from "@prismicio/react";
+import RightMenuLinkSlice from "./navlink";
+
 export default function Navbar(props) {
+  const [links, setLinks] = useState(null);
   const leftmenu = [
     {
       label: "Portfolio",
@@ -21,27 +26,28 @@ export default function Navbar(props) {
   ];
 
   const rightmenu = [
-    {
-      label: "Prints",
-      href: "/archive",
-      external: true
-    },
-    {
-      label: "",
-      href: "https://twitter.com/tropicalua",
-      external: true,
-      badge: "Twitter"
-    },
-    {
-      label: "",
-      href: "https://www.instagram.com/luanakkl/",
-      external: true,
-      badge: "Instagram"
-    }
+
   ];
+  async function getRightMenu() {
+    const client = createClient();
+    const postsResponse = await client.getByType('contactsnavbar');
+    setLinks(postsResponse)
+  }
+
+
+  
+  useEffect(() => {
+  const initialRender = true; 
+
+    if (initialRender) {
+      getRightMenu();
+    } 
+
+    return () => false;
+  }, [])
+
 
   const mobilemenu = [...leftmenu, ...rightmenu];
-  const router = useRouter();
   return (
     <Container>
       <nav>
@@ -116,21 +122,12 @@ export default function Navbar(props) {
                 </div>
 
                 <div className="flex-col items-center justify-start order-2 hidden w-full md:flex md:flex-row md:w-auto md:flex-1 md:order-none">
-                  {rightmenu.map((item, index) => (
-                    <Link href={item.href} key={index} legacyBehavior>
-                      <a
-                        className="px-5 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-blue-500"
-                        target={item.external ? "_blank" : ""}
-                        rel={item.external ? "noopener" : ""}>
-                        <span> {item.label}</span>
-                        {item.badge && (
-                          <span className="bg-blue-100 text-blue-600 text-xs font-semibold ml-2 px-2 py-0.5 rounded dark:bg-cyan-200 dark:text-blue-800 ">
-                            {item.badge}
-                          </span>
-                        )}
-                      </a>
-                    </Link>
-                  ))}
+                        <SliceZone
+                          slices={links?.results[0].data.slices}
+                          components={
+                            {"nav_item_link":  RightMenuLinkSlice}
+                          }
+                        ></SliceZone>
                 </div>
               </div>
               <Disclosure.Panel>
@@ -145,6 +142,12 @@ export default function Navbar(props) {
                       </a>
                     </Link>
                   ))}
+                  <SliceZone
+                      slices={links?.results[0].data.slices}
+                      components={
+                        {"nav_item_link":  RightMenuLinkSlice}
+                      }
+                    ></SliceZone>
                 </div>
               </Disclosure.Panel>
             </>

@@ -8,7 +8,11 @@ import {
   MailIcon,
   PhoneIcon
 } from "@heroicons/react/24/outline";
-export default function Contact({ siteconfig }) {
+import { createClient } from "prismicio";
+import { format } from "date-fns";
+import ptBR from "date-fns/locale/pt-BR";
+export default function Contact({contacts, siteconfig  }) {
+  console.log(contacts)
   const {
     register,
     handleSubmit,
@@ -46,52 +50,15 @@ export default function Contact({ siteconfig }) {
     <Layout {...siteconfig}>
       <Container>
         <h1 className="mt-2 mb-3 text-3xl font-semibold tracking-tight text-center lg:leading-snug text-brand-primary lg:text-4xl dark:text-white">
-          Contact
+          {contacts?.results[0]?.data?.heading}
         </h1>
         <div className="text-center">
-          <p className="text-lg">We are a here to help.</p>
+          <p className="text-md">{contacts?.results[0]?.data?.paragraph}</p>
         </div>
 
-        <div className="grid my-10 md:grid-cols-2">
-          <div className="my-10">
-            <h2 className="text-2xl font-semibold dark:text-white">
-              Contact Stablo
-            </h2>
-            <p className="max-w-sm mt-5">
-              Have something to say? We are here to help. Fill up the
-              form or send email or call phone.
-            </p>
-
-            <div className="mt-5">
-              <div className="flex items-center mt-2 space-x-2 text-dark-600 dark:text-gray-400">
-                <MapPinIcon className="w-4 h-4" />
-                <span>1734 Sanfransico, CA 93063</span>
-              </div>
-              {siteconfig?.email && (
-                <div className="flex items-center mt-2 space-x-2 text-dark-600 dark:text-gray-400">
-                  <MailIcon className="w-4 h-4" />
-                  <a href={`mailto:${siteconfig.email}`}>
-                    {siteconfig.email}
-                  </a>
-                </div>
-              )}
-              {siteconfig?.phone && (
-                <div className="flex items-center mt-2 space-x-2 text-dark-600 dark:text-gray-400">
-                  <PhoneIcon className="w-4 h-4" />
-                  <a href={`tel:${siteconfig.phone}`}>
-                    {siteconfig.phone}
-                  </a>
-                </div>
-              )}
-            </div>
-          </div>
+        <div className="grid my-10 md:max-w-xl md:mx-auto">
           <div>
             <form onSubmit={handleSubmit(onSubmit)} className="my-10">
-                {/* <input
-                type="hidden"
-                value={apiKey}
-                {...register("access_key")}
-                /> */}
               <input
                 type="checkbox"
                 id=""
@@ -215,3 +182,34 @@ export default function Contact({ siteconfig }) {
     </Layout>
   );
 }
+
+
+export const getStaticProps = async () => {
+  const client = createClient();
+  const contactsResponse = await client.getByType('contatos');
+  const contacts = {
+      results: contactsResponse.results.map(item => {
+        return {
+          id: item.id,
+          last_publication_date: format(
+            new Date(item.last_publication_date),
+            'dd LLL yyyy',
+            {
+              locale: ptBR,
+            }
+          ),
+          data: {
+            heading: item.data.slices[0].primary.title[0].text,
+            paragraph: item.data.slices[0].primary.description[0].text,
+          },
+        };
+      }),
+    };
+    console.log(contacts)
+
+  return {
+    props: {
+      contacts,
+    },
+  };
+};
