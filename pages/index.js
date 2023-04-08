@@ -1,17 +1,10 @@
 import { createClient } from '../prismicio';
-
 import { PrismicRichText, SliceZone } from "@prismicio/react";
-
 import { format } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
-import Head from 'next/head';
 import { useState } from 'react';
-// import { FiCalendar, FiUser } from 'react-icons/fi';
 import Layout from "../components/layout";
-import { Heading } from '@components/Heading';
-import { Text } from '@components/Text';
-import ImageTest from '@components/image';
-import ImageSlice from '@components/image';
+
 
 export default function Home({ postsPagination, headingContent, headingResponse }) {
   const [posts, setPosts] = useState(postsPagination);
