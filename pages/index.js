@@ -70,8 +70,8 @@ export default function Home({ postsPagination, headingContent, headingResponse 
               /> */}
           </div>
           {posts.next_page && (
-            <div className='my-10 underline cursor-pointer hover:bg-blue-500'>
-              <a onClick={loadMorePosts}>Carregar mais artezinhas :)</a>
+            <div className='my-10 underline cursor-pointer'>
+              <a onClick={loadMorePosts}>Load more art :)</a>
             </div>
           )}
         </main>
