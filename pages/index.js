@@ -4,6 +4,7 @@ import { format } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 import { useState } from 'react';
 import Layout from "../components/layout";
+import Script from 'next/script';
 
 
 export default function Home({ postsPagination, headingContent, headingResponse }) {
@@ -75,6 +76,20 @@ export default function Home({ postsPagination, headingContent, headingResponse 
           )}
         </main>
       </Layout>
+      {/* <!-- Global site tag (gtag.js) - Google Analytics --> */}
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-WYNBSN3ZMN"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){window.dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-WYNBSN3ZMN');
+        `}
+      </Script>
     </>
   );
 }

@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps }) {
       internalLinkComponent={props => <Link {...props} 
 
       />} >
-      <Head>
+         <Head>
         <title>Luana Góes</title>
       </Head>
       <Component {...pageProps} />
