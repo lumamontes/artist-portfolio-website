@@ -139,9 +139,9 @@ export default function Navbar(props) {
                   {mobilemenu.map((item, index) => (
                     <Link href={item.href} key={index} legacyBehavior>
                       <a
-                        className={`px-5 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-blue-500 ${currentRoute === item.href 
+                        className={`px-5 py-2 text-sm font-medium dark:text-gray-400 hover:text-blue-500 ${currentRoute === item.href 
                           ? "text-blue-500" 
-                          : "text-gray-500"}`}
+                          : "text-gray-600"}`}
                         target={item.external ? "_blank" : ""}
                         rel={item.external ? "noopener" : ""}>
                         {item.label}
