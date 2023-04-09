@@ -8,7 +8,7 @@ export default function Footer(props) {
         rights reserved.
       </div>
       <div className="flex justify-center gap-1 mt-1 text-sm text-center text-gray-500 dark:text-gray-600">
-         Com por ❤️ <a href="https://github.com/lumamontes" target="_blank" className="hover:to-blue-500">Luma</a>
+         Com ❤️ por  <a href="https://github.com/lumamontes" target="_blank" className="hover:to-blue-500">Luma</a>
       </div>
     </Container>
   );
