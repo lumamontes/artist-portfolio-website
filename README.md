@@ -16,7 +16,6 @@ The website is availible at: https://luanagoes.vercel.app/
  ### :computer: Techs:
 
 - Next.js 
-- TypeScript
 - Tailwind
 - Prismic
 - Web3Forms 
