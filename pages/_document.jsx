@@ -17,7 +17,6 @@ class MyDocument extends Document {
           property="og:title"
           content="Luana Góes"
         />
-        <meta property="og:title" content="Katelyn Nee's photography portfolio" />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="Luaninha" />
         <meta
@@ -25,6 +24,7 @@ class MyDocument extends Document {
           content="Portfolio"
         />
         <meta property="og:image" content="https://luanagoes.vercel.app/img/bird.png" />
+        
         </Head>
         <body className="antialiased">
           <Main />
