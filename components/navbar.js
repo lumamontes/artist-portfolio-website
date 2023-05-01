@@ -60,7 +60,7 @@ export default function Navbar(props) {
                 <div className="flex-col items-center justify-start order-1 hidden w-full md:flex md:flex-row md:justify-end md:w-auto md:order-none md:flex-1">
                   {leftmenu.map((item, index) => (
                     <Link href={item.href} key={index} legacyBehavior>
-                      <a className={`px-5 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-blue-500 ${currentRoute === item.href 
+                      <a className={`px-5 py-2 text-sm font-medium text-gray-600 hover:text-blue-500 ${currentRoute === item.href 
                     ? "text-blue-500" 
                     : "text-gray-500"}`} >
                         {item.label}
@@ -70,7 +70,7 @@ export default function Navbar(props) {
                 </div>
                 <div className="flex items-center justify-between w-full md:w-auto">
                   <Link href="/" legacyBehavior>
-                    <a className="w-28 dark:hidden flex items-center">
+                    <a className="w-28  flex items-center">
                         <Image
                           // {...GetImage(props.logo)}
                           src='/img/bird2.png'
@@ -86,7 +86,7 @@ export default function Navbar(props) {
                     </a>
                   </Link>
                   <Link href="/" legacyBehavior>
-                    <a className="hidden w-28 dark:block">
+                    <a className="hidden w-28 ">
                       {props.logoalt ? (
                         <Image
                           {...GetImage(props.logoalt)}
@@ -103,7 +103,7 @@ export default function Navbar(props) {
                   </Link>
                   <Disclosure.Button
                     aria-label="Toggle Menu"
-                    className="px-2 py-1 ml-auto text-gray-500 rounded-md md:hidden focus:text-blue-500 focus:outline-none dark:text-gray-300 ">
+                    className="px-2 py-1 ml-auto text-gray-500 rounded-md md:hidden focus:text-blue-500 focus:outline-none  ">
                     <svg
                       className="w-6 h-6 fill-current"
                       xmlns="http://www.w3.org/2000/svg"
@@ -139,7 +139,7 @@ export default function Navbar(props) {
                   {mobilemenu.map((item, index) => (
                     <Link href={item.href} key={index} legacyBehavior>
                       <a
-                        className={`px-5 py-2 text-sm font-medium dark:text-gray-400 hover:text-blue-500 ${currentRoute === item.href 
+                        className={`px-5 py-2 text-sm font-medium hover:text-blue-500 ${currentRoute === item.href 
                           ? "text-blue-500" 
                           : "text-gray-600"}`}
                         target={item.external ? "_blank" : ""}

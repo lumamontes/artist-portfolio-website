@@ -12,9 +12,8 @@ function MyApp({ Component, pageProps }) {
       paragraph: ({ children }) => <Text className="p-4" asChild><p>{children}</p></Text>
     }}
       internalLinkComponent={props => <Link {...props} 
-
       />} >
-         <Head>
+      <Head>
         <title>Luana Góes</title>
       </Head>
       <Component {...pageProps} />

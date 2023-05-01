@@ -14,7 +14,7 @@ export default function About({ author, siteconfig }) {
   return (
     <Layout {...siteconfig}>
       <Container>
-        <h1 className="mt-2 mb-3 text-3xl font-semibold tracking-tight text-center lg:leading-snug text-brand-primary lg:text-4xl dark:text-white">
+        <h1 className="mt-2 mb-3 text-3xl font-semibold tracking-tight text-center lg:leading-snug text-brand-primary lg:text-4xl ">
           About
         </h1>
         <div className="text-center">
@@ -34,7 +34,7 @@ export default function About({ author, siteconfig }) {
               </div>
         {/* </div> */}
 
-        <div className="mx-auto prose text-center dark:prose-invert mt-14 leading-loose">
+        <div className="mx-auto prose text-center mt-14 leading-loose">
           {/* <PrismicRichText field={author?.results[0].data?.name} /> */}
           <PrismicRichText field={author?.results[0].data?.about} components={
             {

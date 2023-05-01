@@ -42,7 +42,7 @@ export default function Layout(props) {
         }}
       />
 
-      <div className="antialiased text-gray-800 dark:bg-black dark:text-gray-400 flex flex-col min-h-screen">
+      <div className="antialiased text-gray-800 flex flex-col min-h-screen">
         <div className="grow">
           <Navbar {...props} />
           <div>{children}</div>
