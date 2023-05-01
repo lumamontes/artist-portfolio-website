@@ -15,14 +15,6 @@ function MyApp({ Component, pageProps }) {
       />} >
       <Head>
         <title>Luana Góes</title>
-        <meta
-          property="og:image"
-          content="https://luanagoes.vercel.app/img/bird.png"
-        />
-        <meta
-          name="twitter:image"
-          content="https://luanagoes.vercel.app/img/bird.png"
-        />
       </Head>
       <Component {...pageProps} />
     </PrismicProvider>

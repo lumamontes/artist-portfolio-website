@@ -10,21 +10,25 @@ class MyDocument extends Document {
             name="description"
             content="Luana Góes - Portfolio"
           />
-          <meta property="og:url" content="https://luanagoes.vercel.app/" />
-          <meta property="og:site_name" content="luanagoes.vercel.app/" />
+          <meta property="og:url" content="https://luanagoes.vercel.app" />
+          <meta property="og:site_name" content="https://luanagoes.vercel.app" />
         <meta property="og:type" content="website" />
-          <meta
+        <meta
           property="og:title"
           content="Luana Góes"
         />
-        <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content="Luaninha" />
         <meta
           property="og:description"
-          content="Portfolio"
+          content="My most recent works, including mixed media, collages, acrylic paintings and drawings."
         />
         <meta property="og:image" content="https://luanagoes.vercel.app/img/bird.png" />
         
+        <meta name="twitter:title" content="Luana Góes" />
+        <meta name="twitter:description" content="My most recent works, including mixed media, collages, acrylic paintings and drawings." />
+        <meta name="twitter:image" content="https://luanagoes.vercel.app/img/bird.png" />
+        <meta name="twitter:card" content="summary" />
+
+
         </Head>
         <body className="antialiased">
           <Main />
