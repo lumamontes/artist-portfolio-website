@@ -13,6 +13,9 @@ function MyApp({ Component, pageProps }) {
     }}
       internalLinkComponent={props => <Link {...props} 
       />} >
+      <Head>
+        <title>Luana Góes</title>
+      </Head>
       <Component {...pageProps} />
     </PrismicProvider>
   );
