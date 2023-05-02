@@ -96,7 +96,11 @@ export default function Home({ postsPagination, headingContent, headingResponse 
 export const getStaticProps = async () => {
   const client = createClient();
   const postsResponse = await client.getByType('displayed_arts_images', {
-    pageSize: 10
+    pageSize: 10,
+    orderings: { 
+      field: 'document.first_publication_date', 
+      direction: 'desc'
+    }
   });
 
   const headingResponse = await client.getByType('portfolio_page_texts')
